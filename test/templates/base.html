@@ -1,0 +1,61 @@
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}장고 웹 프로그래밍{% endblock %}</title>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}" />
+</head>
+
+<body>
+    {% comment %} 헤더 영역 {% endcomment %}
+    <div id="header">
+        <h2 class="maintitle">Easy&amp;Fast Django Web Programing</h2>
+        <h4 class="welcome">
+            환영합니다, <a href="#">shkim</a> /
+            <a href="#">비밀번호 변경</a> /
+            <a href="#">로그아웃</a>
+        </h4>
+    </div>
+
+    {% comment %} 메뉴 영역 {% endcomment %}
+    <div id="menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'booktag:index' %}">Booktag</a></li>
+        <li><a href="{% url 'blog:index' %}">Blog</a></li>
+        <li><a href="#">Photo</a></li>
+        <li><a href="#">Add&bigtriangledown;</a>
+            <ul>
+                <li><a href="#">Booktag</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Photo</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Change&bigtriangledown;</a>
+            <ul>
+                <li><a href="#">Booktag</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Photo</a></li>
+            </ul>
+        </li>
+        <li><a href="{% url 'blog:post_archive' %}">Archive</a></li>
+        <li><a href="#">Search</a></li>
+        <li><a href="{% url 'admin:index' %}">Admin</a></li>
+    </div>
+
+    {% comment %} 콘텐츠 영역 {% endcomment %}
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% comment %} 푸터 영역 {% endcomment %}
+    <div id="footer">
+        {% block footer %}{% endblock %}
+    </div>
+</body>
+
+</html>

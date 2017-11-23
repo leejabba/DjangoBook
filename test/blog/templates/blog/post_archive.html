@@ -1,32 +1,28 @@
-<html lang="en">
+<!-- template extends -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>아카이브</title>
-</head>
+<!-- title -->
+{% block title %}post_archive.html{% endblock title %}
 
-<body>
-    <h1>{% now "N d, Y" %} 기준 글 목록</h1>
+<!-- content -->
+{% block content %}
+<h1>{% now "N d, Y" %} 기준 글 목록</h1>
+<ul>
+    {% for date in date_list %}
+    <li style="display: inline;">
+        <a href="{% url 'blog:post_year_archive' date|date:'Y' %}">Year - {{ date|date:"Y년" }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+
+<div>
     <ul>
-        {% for date in date_list %}
-        <li style="display: inline;">
-            <a href="{% url 'blog:post_year_archive' date|date:'Y' %}">Year - {{ date|date:"Y년" }}</a>
+        {% for post in object_list %}
+        <li>{{ post.modify_date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
+            <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
         </li>
         {% endfor %}
     </ul>
-    <br>
-
-    <div>
-        <ul>
-            {% for post in object_list %}
-            <li>{{ post.modify_date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
-                <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
-
-</html>
+</div>
+{% endblock content %}

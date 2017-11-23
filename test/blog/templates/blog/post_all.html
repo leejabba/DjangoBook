@@ -1,25 +1,24 @@
-<html lang="en">
+<!-- templates extends -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>블로그 목록</title>
-</head>
+<!-- title -->
+{% block title %} post_all.html {% endblock title %}
 
-<body>
-    <h1>Blog List</h1>
 
-    {% for post in posts %}
-    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-    {{ post.modify_date|date:"N d, Y" }}
-    <p>{{ post.description }}</p>
-    {% endfor %}
+<!-- content -->
+{% block content %}
+<h1>Blog List</h1>
 
-    <br>
+{% for post in posts %}
+<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+{{ post.modify_date|date:"N d, Y" }}
+<p>{{ post.description }}</p>
+{% endfor %}
 
-    <div>
-        <span>
+<br>
+
+<div>
+    <span>
             {% comment %} page_obj는 장고의 Page 객체가 들어있는 Context 변수이다.
                           현재 페이지 기준으로 이전 페이지가 있는지 확인한다.  {% endcomment %}
             {% if page_obj.has_previous %}
@@ -32,7 +31,5 @@
                 <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
             {% endif %}
         </span>
-    </div>
-</body>
-
-</html>
+</div>
+{% endblock content %}

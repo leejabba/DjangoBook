@@ -1,0 +1,52 @@
+<!-- base.html 템플릿 상속 영역 -->
+{% extends "base.html" %}
+
+<!-- title 블럭 재정의 영역 -->
+{% block title %}home.html{% endblock %}
+
+<!-- static 탬플릿 태그를 사용하기 위해 준비하는 영역 -->
+{% load staticfiles %}
+
+<!-- extrastyle 블럭 재정의. base.css 스타일시트 외에 추가적으로 home.css 스타일시트 지정함. -->
+{% block extrastyle %}{% static "css/home.css" %}{% endblock %}
+
+<!-- 콘텐츠 영역 -->
+{% block content %}
+<div id="content_home">
+    <div id="homeimg">
+        <a href="/"><img src="{% static 'img/django-actor-big.jpg' %}" style="height:500px;"></a>
+        <h4 style="margin: 0;">이것은 장고로 만들어진 웹사이트입니다.</h4>
+    </div>
+    <hr style="margin: 5px 0;">
+
+    <h2>어플리케이션 선택</h2>
+
+    <table id="applist">
+        <tr>
+            <td><b><i><a href="{% url 'booktag:index' %}">Booktag</a></i></b></td>
+            <td>자주 들러보면 유익한 사이트가 있다면 지금 바로 공유하세요!</td>
+            <td class="Edit"><i><a href="#">추가</a></i></td>
+            <td class="Edit"><i><a href="#">수정</a></i></td>
+        </tr>
+        <tr>
+            <td><b><i><a href="{% url 'blog:index' %}">Blog</a></i></b></td>
+            <td>영화를 보고 느낀 당신만의 솔직한 감상을 블로깅 하세요. </td>
+            <td class="Edit"><i><a href="#">추가</a></i></td>
+            <td class="Edit"><i><a href="#">수정</a></i></td>
+        </tr>
+        <tr>
+            <td><b><i><a href="#">Phot</a></i></b></td>
+            <td>감정을 담은 사진은 많은 사람들의 공감을 얻어낼 수 있습니다!</td>
+            <td class="Edit"><i><a href="#">추가</a></i></td>
+            <td class="Edit"><i><a href="#">수정</a></i></td>
+        </tr>
+    </table>
+</div>
+{% endblock content %}
+
+<!-- 푸터 영역 -->
+{% block footer %}
+<div id="footer">
+    &copy; we want freedom 2017
+</div>
+{% endblock footer %}

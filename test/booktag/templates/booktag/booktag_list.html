@@ -1,21 +1,17 @@
-<html lang="en">
+<!-- 템플릿 상속 -->
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>장고 북태그 리스트</title>
-</head>
+<!-- title -->
+{% block title %} 장고 북태그 목록 {% endblock title %}
 
-<body>
-    <div id="content">
-        <h1>북태그 리스트</h1>
-        <ul>
-            {% for booktag in object_list %}
-            <li><a href="{% url 'detail' booktag.id %>">{{ booktag }}</a></li>
-            {% endfor%}
-        </ul>
-    </div>
-</body>
-
-</html>
+<!-- content -->
+{% block content %}
+<div id="content">
+    <h1>북태그 리스트</h1>
+    <ul>
+        {% for booktag in object_list %}
+        <li><a href="{% url 'detail' booktag.id %>">{{ booktag }}</a></li>
+        {% endfor%}
+    </ul>
+</div>
+{% endblock content %}
