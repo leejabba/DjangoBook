@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>년 단위 글 목록</title>
+</head>
+
+<body>
+    <h1>{{ year|date:"Y" }}년에 작성된 글 목록</h1>
+
+    <ul>
+        {% for date in date_list %}
+        <li style="display: inline;">
+            <a href="{% url 'blog:post_month_archive' year|date:'Y' date|date:'b' %}">
+                {{ date|date:"F" }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+
+    <div>
+        <ul>
+            {% for post in object_list %}
+            <li>
+                {{ post.modify_date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
+                <strong>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </strong>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

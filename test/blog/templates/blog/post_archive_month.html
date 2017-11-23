@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>월 글 목록</title>
+</head>
+
+<body>
+    <h1>{{ month|date:"N Y" }}에 작성된 글 목록</h1>
+    <div>
+        <ul>
+            {% for post in object_list %}
+            <li>
+                {{ post.modify_date|date:"Y-m-d" }} &nbsp;&nbsp;&nbsp;
+                <a href="{{ post.get_absolute_url }}">
+                    <strong>
+                        {{ post.title }}
+                    </strong>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
