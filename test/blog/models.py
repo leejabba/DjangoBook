@@ -4,6 +4,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 # reverse() 함수를 사용하기 위해 임포트
 from django.core.urlresolvers import reverse
+# tagging를 사용하기 위한 임포트
+from tagging.fields import TagField
 
 # Create your models here.
 
@@ -16,6 +18,7 @@ class Post(models.Model):
     content = models.TextField('CONTENT')
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
+    tag = TagField()
 
     class Meta:
         verbose_name = 'post'

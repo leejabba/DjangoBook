@@ -19,4 +19,25 @@
 <div class="body">
     {% comment %} linebreaks 템플릿 필터는 \n을 인식할 수 있게 한다. {% endcomment %} {{ object.content|linebreaks }}
 </div>
+
+<div>
+    <b>TAGS: </b>
+    <!-- tagging 패키지에 정의된 커스텀 태그를 사용하기 위해 tagging_tag 모듈을 로딩함 -->
+    {% load tagging_tags %}
+    <!-- object 객체에 달려있는 태그들의 리스트를 추출한다. -->
+    {% tags_for_object object as tags %}
+    <!-- 태그를 추출하는 반복문 -->
+    {% for tag in tags %}
+    <a href="{% url 'blog:tagged_object_list' tag.name %}">{{ tag.name }}</a>
+    <!-- 반복문 종료 -->
+    {% endfor %}
+    <a href="{% url 'blog:tag_cloud' %}"><i>[ TagClud ]</i></a>
+</div>
+<br>
+<div>
+    <!-- disqus_tags 모듈 로딩 -->
+    {% load disqus_tags %}
+    <!-- disqus 댓글 입력폼 표시 -->
+    {% disqus_show_comments %}
+</div>
 {% endblock content %}

@@ -1,0 +1,30 @@
+<!-- 템플릿 확장 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %} tagging_cloud.html {% endblock %}
+
+<!-- 스태틱 커스텀 태그를 사용하기 위해 staticfiles 모듈을 로딩 -->
+{% load staticfiles %} {% block extrastyle %}{% static "tagging/tag.css" %}{% endblock %}
+
+<!-- 콘텐츠 부분 -->
+{% block content %}
+<div id="content">
+    <h1>블로그 태그 클라우드</h1>
+
+    <!-- 태그 클라우드 영역 정의 -->
+    <div class="tag_cloud">
+        <!-- tagging 패키지에 정의된 커스텀 태그를 사용하기 위해 tagging_tags 모듈을 로딩 -->
+        {% load tagging_tags %}
+        <!-- 167페이지 참고 -->
+        {% tag_cloud_for_model blog.Post as tags with steps=6 min_count=1 distribution=log %}
+        <!-- 반복문 -->
+        {% for tag in tags %}
+        <span class="tag-{{ tag.font_size }}">
+            <a href="{% url 'blog:tagged_object_list' tag.name %}">{{ tag.name }} ({{ tag.font_size }})</a>
+        </span>
+        <!-- 반복문 종료 -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
