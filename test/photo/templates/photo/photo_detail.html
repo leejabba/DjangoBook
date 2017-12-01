@@ -1,0 +1,47 @@
+<!-- extends -->
+{% extends "base.html" %}
+
+<!-- title -->
+{% block title %}photo_detail.html{% endblock %}
+
+<!-- static -->
+{% load staticfiles %} {% block extrastyle %}{% static "photo/photo.css" %}{% endblock %}
+
+<!-- content -->
+{% block content %}
+<div id="content">
+    <h2>{{ object.title }}</h2>
+
+    <table class="photo-detail">
+        <tr>
+            <td>
+                <a href="{{ object.image.url }}">
+                    <img src="{{ object.image.url }}" style="max-width:100%">
+                </a>
+            </td>
+
+            <td>
+                <ul>
+                    <li>사진 설명</li>
+                    <!-- start if -->
+                    {% if object.description %}
+                    <p>{{ object.description|linebreaks }}</p>
+                    {% else %}
+                    <p>(blank)</p>
+                    {% endif %}
+                    <!-- end if -->
+
+                    <li>업로드 날짜</li>
+                    <p>{{ object.upload_date }}</p>
+                    <li>앨범명</li>
+                    <p>
+                        <a href="{% url 'photo:album_detail' object.album.id %}">
+                            {{ object.album.name }}
+                        </a>
+                    </p>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

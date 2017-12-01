@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'tagging.apps.TaggingConfig',
     'disqus',
     'django.contrib.sites',
+    'photo.apps.PhotoConfig',
 ]
 
 DISQUS_WEBSITE_SHORTNAME = 'python-web-programming-djnago-1'
@@ -116,3 +117,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
